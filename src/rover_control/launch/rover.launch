@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<launch>
+   
+  <arg name="model" default="$(find rover_description)/robots/rover.urdf.xacro"/>
+  <arg name="gui" default="true" />
+
+  <arg name="rvizconfig" default="$(find rover_control)/rviz/rviz_config.rviz" />
+
+  <param name="robot_description" command="$(find xacro)/xacro '$(arg model)'" />
+  <param name="use_gui" value="$(arg gui)"/>
+  
+  <node name="robot_hardware_interface" pkg="rover_control" type="rover_control" output="screen"/>
+ 
+  <!-- Load configs -->
+  <rosparam file="$(find rover_control)/config/controller.yaml" command="load"/>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher"
+		type="robot_state_publisher" respawn="false" output="screen">
+  </node>
+  
+  
+    
+  <node name="controller_spawner" pkg="controller_manager"
+		type="spawner" output="screen" 
+		args="rover/joint_state_controller rover/four_wheel_steering_controller">
+  </node>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)"/>
+
+</launch>

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find rover_description)/urdf/suspension/suspension.transmission.xacro"/>
+  <xacro:include filename="$(find rover_description)/urdf/suspension/suspension.gazebo.xacro"/>
+  
+  <xacro:macro name="steering_v0" params="prefix parent *joint_origin *joint_axis">
+	<joint name="${prefix}_steering_joint" type="revolute">
+	  <xacro:insert_block name="joint_origin"/>
+	  <parent link="${parent}"/>
+	  <child link="${prefix}_steering_link"/>
+          <limit effort="5" velocity="6.28"  lower="-2.1" upper="2.1" />
+          <xacro:insert_block name="joint_axis"/>
+	</joint>
+
+	<link name="${prefix}_steering_link">  
+
+	  <inertial>
+      <origin
+        xyz="-0.044924 0.0039137 -0.040662"
+        rpy="0 0 0" />
+      <mass
+        value="0.23292" />
+      <inertia
+        ixx="7.0788E-05"
+        ixy="1.2054E-05"
+        ixz="-5.2515E-06"
+        iyy="0.00019796"
+        iyz="2.6886E-06"
+        izz="0.00017873" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/STL/suspension/sus_link.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/STL/suspension/sus_link.stl" />
+      </geometry>
+    </collision>
+	</link>
+  </xacro:macro>
+  
+</robot>
