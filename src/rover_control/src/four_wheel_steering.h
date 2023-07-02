@@ -64,6 +64,7 @@ public:
 
   void read()
   {
+    ROS_INFO("Hello world read");
     // Read the joint state of the robot into the hardware interface
     if (running_)
     {
@@ -74,6 +75,8 @@ public:
         // of the robot.
         joints_[i].position += joints_[i].velocity*getPeriod().toSec(); // update position
         joints_[i].velocity = joints_[i].velocity_command; // might add smoothing here later
+
+        
       }
       for (unsigned int i = 0; i < 4; ++i)
       {
@@ -104,6 +107,8 @@ public:
       os << joints_[i].velocity_command << ", ";
     }
     os << joints_[3].velocity_command;
+    ROS_INFO("Hello world write");
+
 
     ROS_DEBUG_STREAM("Commands for joints: " << os.str());
 

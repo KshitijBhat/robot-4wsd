@@ -6,6 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /TF1/Tree1
       Splitter Ratio: 0.5
     Tree Height: 574
   - Class: rviz/Selection
@@ -116,11 +117,64 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
+    - Class: rviz/TF
+      Enabled: true
+      Filter (blacklist): ""
+      Filter (whitelist): ""
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+        base_footprint:
+          Value: true
+        base_link:
+          Value: true
+        ffl_wheel_link:
+          Value: true
+        ffr_wheel_link:
+          Value: true
+        front_left_steering_link:
+          Value: true
+        front_right_steering_link:
+          Value: true
+        odom:
+          Value: true
+        rear_left_steering_link:
+          Value: true
+        rear_right_steering_link:
+          Value: true
+        rfl_wheel_link:
+          Value: true
+        rfr_wheel_link:
+          Value: true
+      Marker Alpha: 1
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Tree:
+        odom:
+          base_footprint:
+            base_link:
+              front_left_steering_link:
+                ffl_wheel_link:
+                  {}
+              front_right_steering_link:
+                ffr_wheel_link:
+                  {}
+              rear_left_steering_link:
+                rfl_wheel_link:
+                  {}
+              rear_right_steering_link:
+                rfr_wheel_link:
+                  {}
+      Update Interval: 0
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: base_footprint
+    Fixed Frame: odom
     Frame Rate: 30
   Name: root
   Tools:
@@ -144,7 +198,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 2.6067557334899902
+      Distance: 2.532221794128418
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
