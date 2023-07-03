@@ -15,6 +15,9 @@
 #include <hardware_interface/robot_hw.h>
 #include <realtime_tools/realtime_buffer.h>
 
+// Hardware
+#include "pico_comm.hpp"
+
 // NaN
 #include <limits>
 
@@ -62,12 +65,22 @@ public:
   ros::Time getTime() const {return ros::Time::now();}
   ros::Duration getPeriod() const {return ros::Duration(0.01);}
 
+  void start_hardware()
+  {
+
+    // Start Hardware
+    pico_fl.connect(SERIAL_PORT_FL);
+    // pico_fr.connect();
+    // pico_rl.connect();
+    // pico_rr.connect();
+  }
+
   void read()
   {
     // Read the joint state of the robot into the hardware interface
     if (running_)
     {
-      for (unsigned int i = 0; i < 4; ++i)
+      for (unsigned int i = 0; i < 3; ++i)
       {
         // Note that joints_[i].position will be NaN for one more cycle after we start(),
         // but that is consistent with the knowledge we have about the state
@@ -77,10 +90,21 @@ public:
 
         
       }
-      for (unsigned int i = 0; i < 4; ++i)
+      for (unsigned int i = 0; i < 3; ++i)
       {
         steering_joints_[i].position = steering_joints_[i].position_command; // might add smoothing here later
       }
+
+      // Real hardware
+      float steering_position, driving_position, driving_velocity;
+      pico_fl.readEncoder(steering_position, driving_position);
+      pico_fl.readDrivingEncoderVelocity(driving_velocity);
+
+      joints_[1].position = driving_position; // update position
+      joints_[1].velocity = driving_velocity;
+      steering_joints_[1].position = steering_position;
+
+      ROS_INFO("Read encoders: %.2f, %.2f", steering_joints_[3].position, joints_[3].position);
     }
     else
     {
@@ -167,5 +191,10 @@ private:
   ros::NodeHandle nh_;
   ros::ServiceServer start_srv_;
   ros::ServiceServer stop_srv_;
+
+  PicoComms pico_fl;
+  PicoComms pico_fr;
+  PicoComms pico_rl;
+  PicoComms pico_rr;
 
 };

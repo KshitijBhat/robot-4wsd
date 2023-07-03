@@ -35,6 +35,8 @@ int main(int argc, char **argv)
   const ros::Duration dt = robot.getPeriod();
   double elapsed_secs = 0;
 
+  robot.start_hardware();
+
   while(ros::ok())
   {
     begin = std::chrono::system_clock::now();

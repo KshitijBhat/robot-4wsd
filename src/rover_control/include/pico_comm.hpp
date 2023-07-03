@@ -13,11 +13,6 @@
 
 class PicoComms{
     public:
-        PicoComms(const std::string serial_device)
-        {
-            serial_device_ = serial_device;
-        }
-
         void sendchr(std::string data_byte)
         {
             // Write the data to the serial port.
@@ -208,12 +203,13 @@ class PicoComms{
             writeMotor(int(Command), int(vCommand));
         }
 
-        int connect()
+        int connect(const std::string serial_device_)
         {
             try
             {
                 // Open the Serial Port at the desired hardware port.
                 serial_port_.Open(serial_device_) ;
+                std::cout << "SERIAL PORT " << serial_device_ << " opened successfully!" << std::endl;
             }
             catch (const LibSerial::OpenFailed&)
             {
