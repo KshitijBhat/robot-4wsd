@@ -1,6 +1,6 @@
 // NOTE: The contents of this file have been taken largely from the ros_control wiki tutorials
 
-#include "four_wheel_steering.h"
+#include <four_wheel_steering.h>
 #include <chrono>
 #include <thread>
 #include <controller_manager/controller_manager.h>
@@ -16,6 +16,10 @@ int main(int argc, char **argv)
   nh.setParam("/use_sim_time", true);
 
   FourWheelSteering robot;
+
+  nh.getParam("rover/hardware/serial_port_fl", robot.SERIAL_PORT_FL);
+  std::cout << "ROVER SERIAL PORT:" << robot.SERIAL_PORT_FL<< std::endl;
+
   ROS_WARN_STREAM("period: " << robot.getPeriod().toSec());
   controller_manager::ControllerManager cm(&robot, nh);
 

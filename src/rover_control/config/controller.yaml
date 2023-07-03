@@ -21,8 +21,6 @@ rover:
     wheel_radius : 0.1
     wheel_steering_y_offset : 0.03
 
-    serial_port : "/dev/ttyACM0"
-
     # Wheel separation and radius multipliers
     wheel_separation_multiplier: 1.0
     wheel_radius_multiplier    : 1.0
@@ -86,3 +84,9 @@ rover:
           p: 10.0
           i: 1
           d: 0.0
+
+  hardware:
+    serial_port_fl : "/dev/ttyACM0"
+    #serial_port_fr : "/dev/ttyACM0"
+    #serial_port_rl : "/dev/ttyACM0"
+    #serial_port_rr : "/dev/ttyACM0"

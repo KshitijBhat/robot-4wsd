@@ -64,7 +64,6 @@ public:
 
   void read()
   {
-    ROS_INFO("Hello world read");
     // Read the joint state of the robot into the hardware interface
     if (running_)
     {
@@ -107,7 +106,6 @@ public:
       os << joints_[i].velocity_command << ", ";
     }
     os << joints_[3].velocity_command;
-    ROS_INFO("Hello world write");
 
 
     ROS_DEBUG_STREAM("Commands for joints: " << os.str());
@@ -133,6 +131,12 @@ public:
     running_ = false;
     return true;
   }
+
+  //Hardware
+  std::string SERIAL_PORT_FL;
+  std::string SERIAL_PORT_FR;
+  std::string SERIAL_PORT_RL;
+  std::string SERIAL_PORT_RR;
 
 private:
   hardware_interface::JointStateInterface    jnt_state_interface_;
@@ -163,4 +167,5 @@ private:
   ros::NodeHandle nh_;
   ros::ServiceServer start_srv_;
   ros::ServiceServer stop_srv_;
+
 };
