@@ -95,16 +95,19 @@ public:
         steering_joints_[i].position = steering_joints_[i].position_command; // might add smoothing here later
       }
 
+      for (unsigned int i = 0; i < 1; ++i)
+      {
       // Real hardware
       float steering_position, driving_position, driving_velocity;
       pico_fl.readEncoder(steering_position, driving_position);
       pico_fl.readDrivingEncoderVelocity(driving_velocity);
 
-      joints_[1].position = driving_position; // update position
-      joints_[1].velocity = driving_velocity;
-      steering_joints_[1].position = steering_position;
+      joints_[i].position = driving_position; // update position
+      joints_[i].velocity = driving_velocity;
+      steering_joints_[i].position = steering_position;
 
-      ROS_INFO("Read encoders: %.2f, %.2f", steering_joints_[3].position, joints_[3].position);
+      ROS_INFO("Read encoders: %.2f, %.2f", steering_joints_[i].position, joints_[i].position);
+      }
     }
     else
     {
@@ -141,6 +144,15 @@ public:
     }
     os << steering_joints_[3].position_command;
     ROS_DEBUG_STREAM("Commands for steering joints: " << os.str());
+
+    for (unsigned int i = 0; i < 1; ++i)
+      {
+      
+      // Real hardware
+      ROS_INFO("Target: %.2f , %.2f",steering_joints_[i].position_command, joints_[i].velocity_command);
+      pico_fl.controlLeg(steering_joints_[i].position_command, joints_[i].velocity_command);
+      
+      }
 
   }
 
