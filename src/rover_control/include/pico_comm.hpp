@@ -160,11 +160,11 @@ class PicoComms{
             float Command;
 
             Command = Kp*error + Ki*errorIntegral + Kd*errorDerivative;
-            if (Command<70 && Command >0){
-                Command = 70;
+            if (Command<MIN_COMMAND && Command >0){
+                Command = MIN_COMMAND;
             }
-            if (Command>-70 && Command <0){
-                Command = -70;
+            if (Command>-MIN_COMMAND && Command <0){
+                Command = -MIN_COMMAND;
             }
             
             // Update prev_error
@@ -189,14 +189,20 @@ class PicoComms{
             float verrorDerivative = (verror - vprev_error);
 
             // Clamp the integrated error (start with Imax = max_duty_cycle/2)
-            if (verrorIntegral>vImax) errorIntegral=vImax;
-            if (verrorIntegral<(-vImax)) errorIntegral=-vImax;
+            if (verrorIntegral>vImax) verrorIntegral=vImax;
+            if (verrorIntegral<(-vImax)) verrorIntegral=-vImax;
 
             
             float vCommand;
             vCommand = vKp*verror + vKi*verrorIntegral + vKd*verrorDerivative;
             
             
+            if (vCommand<MIN_COMMAND && vCommand >0){
+                vCommand = MIN_COMMAND;
+            }
+            if (vCommand>-MIN_COMMAND && Command <0){
+                vCommand = -MIN_COMMAND;
+            }
             // Update prev_error
             vprev_error = verror;
 
@@ -257,6 +263,8 @@ class PicoComms{
         float errorIntegral;
         float prev_error;
         float pos_prev = 0;
+
+        float MIN_COMMAND = 30;
 
         float vKp = 6;
         float vKi = 0.4;
