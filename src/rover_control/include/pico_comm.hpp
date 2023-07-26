@@ -82,6 +82,17 @@ class PicoComms{
             pos_prev = pos_now;
         }
 
+        void readSteeringDriving(float &pos_steering, float &pos_driving, float &vel_driving)
+        {
+            auto new_time = std::chrono::system_clock::now();
+            std::chrono::duration<float> diff = new_time - time_;
+            float deltaSeconds = diff.count();
+            time_ = new_time;
+            readEncoder(pos_steering, pos_driving);
+            vel_driving = (pos_driving - pos_prev) / deltaSeconds;
+            pos_prev = pos_driving;
+        }
+
         void controlPosition(float targetPosition)
         {
             //https://vanhunteradams.com/Pico/ReactionWheel/Tuning.html

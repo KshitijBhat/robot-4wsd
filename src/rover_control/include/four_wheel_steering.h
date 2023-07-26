@@ -99,8 +99,10 @@ public:
       {
       // Real hardware
       float steering_position, driving_position, driving_velocity;
-      pico_fl.readEncoder(steering_position, driving_position);
-      pico_fl.readDrivingEncoderVelocity(driving_velocity);
+      // pico_fl.readEncoder(steering_position, driving_position);
+      // pico_fl.readDrivingEncoderVelocity(driving_velocity);
+
+      pico_fl.readSteeringDriving(steering_position, driving_position, driving_velocity)
 
       joints_[i].position = driving_position; // update position
       joints_[i].velocity = driving_velocity;
