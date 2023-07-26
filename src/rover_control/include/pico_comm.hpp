@@ -9,7 +9,14 @@
 #include <chrono>
 
 #define PI 3.1416
-#define ENCODER_TICKS_PER_REV 660
+
+// ENCODER_TICKS_PER_REV 660 for 100 rpm motor
+// ENCODER_TICKS_PER_REV 660*100/30 for 30 rpm motor
+// ENCODER_TICKS_PER_REV 660*100/10 for 10 rpm motor
+
+#define STEERING_ENCODER_TICKS_PER_REV 6600
+#define DRIVING_ENCODER_TICKS_PER_REV 2200
+
 
 class PicoComms{
     public:
@@ -58,8 +65,8 @@ class PicoComms{
                 std::string token_1 = read_buffer.substr(0, del_pos);
                 std::string token_2 = read_buffer.substr(del_pos + delimiter.length());
 
-                encoder_val1 = std::atoi(token_1.c_str())*2*PI/ENCODER_TICKS_PER_REV;
-                encoder_val2 = std::atoi(token_2.c_str())*2*PI/ENCODER_TICKS_PER_REV;
+                encoder_val1 = std::atoi(token_1.c_str())*2*PI/STEERING_ENCODER_TICKS_PER_REV;
+                encoder_val2 = std::atoi(token_2.c_str())*2*PI/DRIVING_ENCODER_TICKS_PER_REV;
             }
         }
 
