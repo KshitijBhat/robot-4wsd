@@ -167,10 +167,10 @@ class PicoComms{
             // Control Position ________________________________________
 
             //https://vanhunteradams.com/Pico/ReactionWheel/Tuning.html
-            float encoder_s, encoder_d;
-            readEncoder(encoder_s, encoder_d);
+            float pos_s, pos_d, vel_d;
+            readSteeringDriving(pos_s, pos_d, vel_d);
             // Compute the error encoder_s is the current position
-            float error = targetPosition - encoder_s;
+            float error = targetPosition - pos_s;
 
             // Integrate the error
             errorIntegral += error;
@@ -191,19 +191,22 @@ class PicoComms{
             if (Command>-MIN_COMMAND && Command <0){
                 Command = -MIN_COMMAND;
             }
+
+// Steering Joint Limits 
+            if (pos_s>PI || pos_s<-PI){
+                Command = 0.0;
+            }
             
             // Update prev_error
             prev_error = error;
 
+            
             // Control Velocity ________________________________________
 
-            float velocity;
-            readDrivingEncoderVelocity(velocity);
-
               // Low-pass filter (25 Hz cutoff) https://github.com/curiores/ArduinoTutorials/blob/main/SpeedControl/SpeedControl/SpeedControl.ino
-            vfilt = 0.95*vfilt + 0.05*velocity;
+            vfilt = 0.95*vfilt + 0.05*vel_d;
             // vfilt = 0.854*vfilt + 0.0728*velocity + 0.0728*vprev;
-            vprev = velocity;
+            vprev = vel_d;
             // Compute the error encoder_s is the current position
             float verror = targetVelocity - vfilt;
 

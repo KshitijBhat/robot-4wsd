@@ -87,8 +87,6 @@ public:
         // of the robot.
         joints_[i].position += joints_[i].velocity*getPeriod().toSec(); // update position
         joints_[i].velocity = joints_[i].velocity_command; // might add smoothing here later
-
-        
       }
       for (unsigned int i = 0; i < 3; ++i)
       {
@@ -145,7 +143,6 @@ public:
       ROS_INFO("Sending: %.2f , %.2f",0.0, 0.0);
       pico_fl.writeMotor(0, 0);
       }
-
   }
 
   bool start_callback(std_srvs::Empty::Request& /*req*/, std_srvs::Empty::Response& /*res*/)
