@@ -23,6 +23,6 @@
 		args="rover/joint_state_controller rover/four_wheel_steering_controller">
   </node>
 
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)"/>
+  <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)"/> -->
 
 </launch>

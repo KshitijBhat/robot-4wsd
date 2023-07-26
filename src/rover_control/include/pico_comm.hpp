@@ -35,6 +35,13 @@ class PicoComms{
             Kd = setKd;
         }
 
+        void setvPID(double setvKp, double setvKi, double setvKd)
+        {
+            vKp = setvKp;
+            vKi = setvKi;
+            vKd = setvKd;
+        }
+
         void readEncoder(float &encoder_val1, float &encoder_val2)
         {
             std::string read_buffer ;
@@ -267,7 +274,7 @@ class PicoComms{
         float MIN_COMMAND = 30;
 
         float vKp = 6;
-        float vKi = 0.4;
+        float vKi = 0.0;
         float vKd = 0.0;
         float vImax = 128;
         float verrorIntegral;

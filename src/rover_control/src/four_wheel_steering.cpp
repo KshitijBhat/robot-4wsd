@@ -66,6 +66,9 @@ int main(int argc, char **argv)
     internal_time += dt;
   }
   spinner.stop();
+  robot.kill_all();
+  robot.kill_all();
+  robot.kill_all();
 
   return 0;
 }
