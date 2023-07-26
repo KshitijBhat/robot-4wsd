@@ -102,7 +102,7 @@ public:
       // pico_fl.readEncoder(steering_position, driving_position);
       // pico_fl.readDrivingEncoderVelocity(driving_velocity);
 
-      pico_fl.readSteeringDriving(steering_position, driving_position, driving_velocity)
+      pico_fl.readSteeringDriving(steering_position, driving_position, driving_velocity);
 
       joints_[i].position = driving_position; // update position
       joints_[i].velocity = driving_velocity;
@@ -128,31 +128,22 @@ public:
 
   void write()
   {
-    // Write the commands to the joints
-    std::ostringstream os;
-    for (unsigned int i = 0; i < 3; ++i)
-    {
-      os << joints_[i].velocity_command << ", ";
-    }
-    os << joints_[3].velocity_command;
-
-
-    ROS_DEBUG_STREAM("Commands for joints: " << os.str());
-
-    os.str("");
-    for (unsigned int i = 0; i < 3; ++i)
-    {
-      os << steering_joints_[i].position_command << ", ";
-    }
-    os << steering_joints_[3].position_command;
-    ROS_DEBUG_STREAM("Commands for steering joints: " << os.str());
-
     for (unsigned int i = 0; i < 1; ++i)
       {
-      
       // Real hardware
       ROS_INFO("Target: %.2f , %.2f",steering_joints_[i].position_command, joints_[i].velocity_command);
       pico_fl.controlLeg(steering_joints_[i].position_command, joints_[i].velocity_command);
+      }
+
+  }
+
+    void kill_all()
+  {
+    for (unsigned int i = 0; i < 1; ++i)
+      {
+      // Real hardware
+      ROS_INFO("Sending: %.2f , %.2f",0.0, 0.0);
+      pico_fl.writeMotor(0, 0);
       }
 
   }
