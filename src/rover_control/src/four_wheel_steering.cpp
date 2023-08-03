@@ -18,7 +18,16 @@ int main(int argc, char **argv)
   FourWheelSteering robot;
 
   nh.getParam("rover/hardware/serial_port_fl", robot.SERIAL_PORT_FL);
-  std::cout << "ROVER SERIAL PORT:" << robot.SERIAL_PORT_FL<< std::endl;
+  std::cout << "FL Serial Port:" << robot.SERIAL_PORT_FL<< std::endl;
+
+  nh.getParam("rover/hardware/serial_port_fr", robot.SERIAL_PORT_FR);
+  std::cout << "FR Serial Port:" << robot.SERIAL_PORT_FR<< std::endl;
+
+  nh.getParam("rover/hardware/serial_port_rl", robot.SERIAL_PORT_RL);
+  std::cout << "RL Serial Port:" << robot.SERIAL_PORT_RL<< std::endl;
+
+  nh.getParam("rover/hardware/serial_port_rr", robot.SERIAL_PORT_RR);
+  std::cout << "RR Serial Port:" << robot.SERIAL_PORT_RR<< std::endl;
 
   ROS_WARN_STREAM("period: " << robot.getPeriod().toSec());
   controller_manager::ControllerManager cm(&robot, nh);

@@ -70,6 +70,9 @@ public:
 
     // Start Hardware
     pico_fl.connect(SERIAL_PORT_FL);
+    pico_fr.connect(SERIAL_PORT_FR);
+    pico_rl.connect(SERIAL_PORT_RL);
+    pico_rr.connect(SERIAL_PORT_RR);
     // pico_fr.connect();
     // pico_rl.connect();
     // pico_rr.connect();
