@@ -86,7 +86,7 @@ rover:
           d: 0.0
 
   hardware:
-    serial_port_fl : "fl_pico"
-    serial_port_fr : "fr_pico"
-    serial_port_rl : "rl_pico"
-    serial_port_rr : "rr_pico"
+    serial_port_fl : "/dev/fl_pico"
+    serial_port_fr : "/dev/fr_pico"
+    serial_port_rl : "/dev/rl_pico"
+    serial_port_rr : "/dev/rr_pico"

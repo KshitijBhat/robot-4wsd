@@ -134,7 +134,7 @@ class PicoComms{
             readDrivingEncoderVelocity(velocity);
 
               // Low-pass filter (25 Hz cutoff) https://github.com/curiores/ArduinoTutorials/blob/main/SpeedControl/SpeedControl/SpeedControl.ino
-            vfilt = 0.95*vfilt + 0.05*velocity;
+            vfilt = 0.9*vfilt + 0.1*velocity;
             // vfilt = 0.854*vfilt + 0.0728*velocity + 0.0728*vprev;
             vprev = velocity;
             // Compute the error encoder_s is the current position
@@ -204,7 +204,7 @@ class PicoComms{
             // Control Velocity ________________________________________
 
               // Low-pass filter (25 Hz cutoff) https://github.com/curiores/ArduinoTutorials/blob/main/SpeedControl/SpeedControl/SpeedControl.ino
-            vfilt = 0.95*vfilt + 0.05*vel_d;
+            vfilt = 0.5*vfilt + 0.5*vel_d;
             // vfilt = 0.854*vfilt + 0.0728*velocity + 0.0728*vprev;
             vprev = vel_d;
             // Compute the error encoder_s is the current position
@@ -222,7 +222,7 @@ class PicoComms{
 
             
             float vCommand;
-            vCommand = vKp*verror + vKi*verrorIntegral + vKd*verrorDerivative;
+            vCommand = vKp*verror; // + vKi*verrorIntegral + vKd*verrorDerivative;
             
             
             if (vCommand<MIN_COMMAND && vCommand >0){
@@ -296,7 +296,7 @@ class PicoComms{
 
         float vKp = 6;
         float vKi = 0.0;
-        float vKd = 0.0;
+        float vKd = 0.4;
         float vImax = 128;
         float verrorIntegral;
         float vprev = 0;
