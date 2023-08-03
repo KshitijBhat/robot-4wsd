@@ -69,13 +69,17 @@ public:
   {
 
     // Start Hardware
-    pico_fl.connect(SERIAL_PORT_FL);
-    pico_fr.connect(SERIAL_PORT_FR);
-    pico_rl.connect(SERIAL_PORT_RL);
-    pico_rr.connect(SERIAL_PORT_RR);
-    // pico_fr.connect();
-    // pico_rl.connect();
-    // pico_rr.connect();
+    //pico_fl.connect(SERIAL_PORT_FL);
+    //pico_fr.connect(SERIAL_PORT_FR);
+    //pico_rl.connect(SERIAL_PORT_RL);
+    //pico_rr.connect(SERIAL_PORT_RR);
+    for (unsigned int i = 0; i < 4; ++i)
+      {
+        controllers[i].connect(SERIAL_PORTS[i]);
+      } 
+    
+    
+
   }
 
   void read()
@@ -83,18 +87,6 @@ public:
     // Read the joint state of the robot into the hardware interface
     if (running_)
     {
-      for (unsigned int i = 0; i < 3; ++i)
-      {
-        // Note that joints_[i].position will be NaN for one more cycle after we start(),
-        // but that is consistent with the knowledge we have about the state
-        // of the robot.
-        joints_[i].position += joints_[i].velocity*getPeriod().toSec(); // update position
-        joints_[i].velocity = joints_[i].velocity_command; // might add smoothing here later
-      }
-      for (unsigned int i = 0; i < 3; ++i)
-      {
-        steering_joints_[i].position = steering_joints_[i].position_command; // might add smoothing here later
-      }
 
       for (unsigned int i = 0; i < 1; ++i)
       {
@@ -103,7 +95,7 @@ public:
       // pico_fl.readEncoder(steering_position, driving_position);
       // pico_fl.readDrivingEncoderVelocity(driving_velocity);
 
-      pico_fl.readSteeringDriving(steering_position, driving_position, driving_velocity);
+      controllers[i].readSteeringDriving(steering_position, driving_position, driving_velocity);
 
       joints_[i].position = driving_position; // update position
       joints_[i].velocity = driving_velocity;
@@ -133,7 +125,7 @@ public:
       {
       // Real hardware
       ROS_INFO("Target: %.2f , %.2f",steering_joints_[i].position_command, joints_[i].velocity_command);
-      pico_fl.controlLeg(steering_joints_[i].position_command, joints_[i].velocity_command);
+      controllers[i].controlLeg(steering_joints_[i].position_command, joints_[i].velocity_command);
       }
 
   }
@@ -144,7 +136,7 @@ public:
       {
       // Real hardware
       ROS_INFO("Sending: %.2f , %.2f",0.0, 0.0);
-      pico_fl.writeMotor(0, 0);
+      controllers[i].writeMotor(0, 0);
       }
   }
 
@@ -161,10 +153,11 @@ public:
   }
 
   //Hardware
-  std::string SERIAL_PORT_FL;
-  std::string SERIAL_PORT_FR;
-  std::string SERIAL_PORT_RL;
-  std::string SERIAL_PORT_RR;
+  //std::string SERIAL_PORT_FL;
+  //std::string SERIAL_PORT_FR;
+  //std::string SERIAL_PORT_RL;
+  //std::string SERIAL_PORT_RR;
+  std::string SERIAL_PORTS[4];
 
 private:
   hardware_interface::JointStateInterface    jnt_state_interface_;
@@ -196,9 +189,11 @@ private:
   ros::ServiceServer start_srv_;
   ros::ServiceServer stop_srv_;
 
-  PicoComms pico_fl;
-  PicoComms pico_fr;
-  PicoComms pico_rl;
-  PicoComms pico_rr;
+  //PicoComms pico_fl;
+  //PicoComms pico_fr;
+  //PicoComms pico_rl;
+  //PicoComms pico_rr;
+  
+  PicoComms controllers[4];
 
 };
