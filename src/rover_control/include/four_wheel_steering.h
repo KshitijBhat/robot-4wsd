@@ -20,6 +20,7 @@
 
 // NaN
 #include <limits>
+#include <vector>
 
 // ostringstream
 #include <sstream>
@@ -88,7 +89,7 @@ public:
     if (running_)
     {
 
-      for (unsigned int i = 0; i < 1; ++i)
+      for (unsigned int i = 0; i < 4; ++i)
       {
       // Real hardware
       float steering_position, driving_position, driving_velocity;
@@ -101,8 +102,9 @@ public:
       joints_[i].velocity = driving_velocity;
       steering_joints_[i].position = steering_position;
 
-      ROS_INFO("Read encoders: %.2f, %.2f", steering_joints_[i].position, joints_[i].velocity);
+      ROS_INFO("Read encoders %d: %.2f, %.2f", i, steering_joints_[i].position, joints_[i].velocity);
       }
+      //ROS_INFO("Read encoders %d: %.2f, %.2f", 1, steering_joints_[1].position, joints_[1].velocity);
     }
     else
     {
@@ -121,18 +123,19 @@ public:
 
   void write()
   {
-    for (unsigned int i = 0; i < 1; ++i)
+    for (unsigned int i = 0; i < 4; ++i)
       {
       // Real hardware
-      ROS_INFO("Target: %.2f , %.2f",steering_joints_[i].position_command, joints_[i].velocity_command);
+      ROS_INFO("Target %d:, %.2f , %.2f", i, steering_joints_[i].position_command, joints_[i].velocity_command);
       controllers[i].controlLeg(steering_joints_[i].position_command, joints_[i].velocity_command);
       }
+      //ROS_INFO("Target      %d:, %.2f , %.2f", 1, steering_joints_[1].position_command, joints_[1].velocity_command);
 
   }
 
     void kill_all()
   {
-    for (unsigned int i = 0; i < 1; ++i)
+    for (unsigned int i = 0; i < 4; ++i)
       {
       // Real hardware
       ROS_INFO("Sending: %.2f , %.2f",0.0, 0.0);
@@ -158,6 +161,13 @@ public:
   //std::string SERIAL_PORT_RL;
   //std::string SERIAL_PORT_RR;
   std::string SERIAL_PORTS[4];
+  
+  std::vector<double> pid_gains_steering;
+  std::vector<double> pid_gains_driving;
+  
+  PicoComms controllers[4];
+  
+  
 
 private:
   hardware_interface::JointStateInterface    jnt_state_interface_;
@@ -194,6 +204,8 @@ private:
   //PicoComms pico_rl;
   //PicoComms pico_rr;
   
-  PicoComms controllers[4];
+  
+  
+  
 
 };

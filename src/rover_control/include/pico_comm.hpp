@@ -35,18 +35,18 @@ class PicoComms{
             sendchr(string_data);
         }
 
-        void setPID(double setKp, double setKi, double setKd)
+        void setPID(std::vector<double> set_gains)
         {
-            Kp = setKp;
-            Ki = setKi;
-            Kd = setKd;
+            Kp = set_gains[0];
+            Ki = set_gains[1];
+            Kd = set_gains[2];
         }
 
-        void setvPID(double setvKp, double setvKi, double setvKd)
+        void setvPID(std::vector<double> set_vgains)
         {
-            vKp = setvKp;
-            vKi = setvKi;
-            vKd = setvKd;
+            vKp = set_vgains[0];
+            vKi = set_vgains[1];
+            vKd = set_vgains[2];
         }
 
         void readEncoder(float &encoder_val1, float &encoder_val2)

@@ -90,3 +90,5 @@ rover:
     serial_port_fr : "/dev/fr_pico"
     serial_port_rl : "/dev/rl_pico"
     serial_port_rr : "/dev/rr_pico"
+    pid_gains_steering: [180.0, 0.0, 0.0]
+    pid_gains_driving: [15.0, 0.0, 0.0]

@@ -28,6 +28,20 @@ int main(int argc, char **argv)
 
   nh.getParam("rover/hardware/serial_port_rr", robot.SERIAL_PORTS[3]);
   std::cout << "RR Serial Port:" << robot.SERIAL_PORTS[3]<< std::endl;
+  
+  nh.getParam("rover/hardware/pid_gains_steering", robot.pid_gains_steering);
+  nh.getParam("rover/hardware/pid_gains_driving", robot.pid_gains_driving);
+  
+  // Set PID values
+  for (unsigned int i = 0; i < 4; ++i)
+  {
+      robot.controllers[i].setPID(robot.pid_gains_steering);
+      robot.controllers[i].setvPID(robot.pid_gains_driving);
+  }
+  
+  std::cout<< "P    "<< robot.pid_gains_steering[0]<< "     "<<robot.pid_gains_driving[0]<<std::endl;
+  std::cout<< "I    "<< robot.pid_gains_steering[1]<< "     "<<robot.pid_gains_driving[1]<<std::endl;
+  std::cout<< "D    "<< robot.pid_gains_steering[2]<< "     "<<robot.pid_gains_driving[2]<<std::endl;
 
   ROS_WARN_STREAM("period: " << robot.getPeriod().toSec());
   controller_manager::ControllerManager cm(&robot, nh);
