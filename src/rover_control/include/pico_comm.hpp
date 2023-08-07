@@ -170,7 +170,7 @@ class PicoComms{
             float pos_s, pos_d, vel_d;
             readSteeringDriving(pos_s, pos_d, vel_d);
             // Compute the error encoder_s is the current position
-            float error = targetPosition - pos_s;
+            float error = targetPosition ; //- pos_s;
 
             // Integrate the error
             errorIntegral += error;
