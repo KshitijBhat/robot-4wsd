@@ -203,7 +203,7 @@ class PicoComms{
             
             // Control Velocity ________________________________________
 
-              // Low-pass filter (25 Hz cutoff) https://github.com/curiores/ArduinoTutorials/blob/main/SpeedControl/SpeedControl/SpeedControl.ino
+              // Low-pass filter https://github.com/curiores/ArduinoTutorials/blob/main/SpeedControl/SpeedControl/SpeedControl.ino
             vfilt = 0.5*vfilt + 0.5*vel_d;
             // vfilt = 0.854*vfilt + 0.0728*velocity + 0.0728*vprev;
             vprev = vel_d;
@@ -235,6 +235,7 @@ class PicoComms{
             vprev_error = verror;
 
             writeMotor(int(Command), int(vCommand));
+            std::cout<<"Commands: "<<int(Command)<<" "<< int(vCommand)<<std::endl;
         }
 
         int connect(const std::string serial_device_)
