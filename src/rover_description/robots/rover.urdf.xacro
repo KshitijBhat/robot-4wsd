@@ -11,51 +11,51 @@
   <!-- Base -->
   <link name="base_footprint"/>
   <xacro:base_v0 parent="base_footprint">
-	<origin xyz="0 0 0.3" rpy="0 0 -1.570796"/>
+	<origin xyz="0 0 0.25" rpy="0 0 -1.570796"/>
   </xacro:base_v0>
 
   <!-- Suspension -->
   <!-- Front Right Sus -->
   <xacro:steering_v0 prefix="front_right" parent="base_link">
-	<origin xyz="0.26937 0.30011 -0.14453" rpy="0 0 0.15"/>
+	<origin xyz="0.63104 -0.25952 -0.0205" rpy="0 0 0"/>
 	<axis xyz="0 0 1"/>
   </xacro:steering_v0>
   <!-- Front Left Sus -->
   <xacro:steering_v0 prefix="front_left" parent="base_link">
-	<origin xyz="-0.26927 0.30019 -0.14943" rpy="0 0 ${M_PI+0.15}"/>
+	<origin xyz="0.63104 0.25952 -0.0205" rpy="0 0 ${M_PI}"/>
 	<axis xyz="0 0 1"/>
   </xacro:steering_v0>
   <!-- Rear Right Sus -->
   <xacro:steering_v0 prefix="rear_right" parent="base_link">
-	<origin xyz="0.26948 -0.2789 -0.15361" rpy="0 0 0.15"/>
+	<origin xyz="-0.63104 -0.25952 -0.0205" rpy="0 0 0"/>
 	<axis xyz="0 0 1"/>
   </xacro:steering_v0>
   <!-- Rear Left Sus -->
   <xacro:steering_v0 prefix="rear_left" parent="base_link">
-	<origin xyz="-0.26951 -0.27994 -0.15131" rpy="0 0 ${M_PI+0.15}"/>
+	<origin xyz="-0.63104 0.25952 -0.0205" rpy="0 0 ${M_PI}"/>
 	<axis xyz="0 0 1"/>
   </xacro:steering_v0>
 
   <!-- Wheel -->
   <!-- Front Right Wheel -->
   <xacro:wheel_v0 prefix="ffr" parent="front_right_steering_link">
-	<origin xyz="0.00049811 -4.3395E-05 -0.085" rpy="0 0 0"/>
-	<axis xyz="-1 0.1 0"/>
+	<origin xyz="0 0 -0.129" rpy="0 0 0"/>
+	<axis xyz="0 -1 0"/>
   </xacro:wheel_v0>
   <!--  Front Left Wheel -->
   <xacro:wheel_v0 prefix="ffl" parent="front_left_steering_link">
-	<origin xyz="0.007 0 -0.085" rpy="0 0 ${M_PI}"/>
-	<axis xyz="-1 0.1 0"/>
+	<origin xyz="0 0 -0.129" rpy="0 0 0"/>
+	<axis xyz="0 -1 0"/>
   </xacro:wheel_v0>
   <!-- Rear Right Wheel -->
   <xacro:wheel_v0 prefix="rfr" parent="rear_right_steering_link">
-	<origin xyz="0.0004994 -2.4447E-05 -0.085" rpy="0 0 0"/>
-	<axis xyz="-1 0.1 0"/>
+	<origin xyz="0 0 -0.129" rpy="0 0 0"/>
+	<axis xyz="0 -1 0"/>
   </xacro:wheel_v0>
   <!--  Rear Left Wheel -->
   <xacro:wheel_v0 prefix="rfl" parent="rear_left_steering_link">
-	<origin xyz="0.0069992 0.00010415 -0.085" rpy="0 0 ${M_PI}"/>
-	<axis xyz="-1 0.1 0"/>
+	<origin xyz="0 0 -0.129" rpy="0 0 0"/>
+	<axis xyz="0 -1 0"/>
   </xacro:wheel_v0>
 
   <!-- ===============  Wheel Transmission =============== -->

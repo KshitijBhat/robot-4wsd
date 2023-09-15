@@ -17,17 +17,17 @@
 
 	  <inertial>
       <origin
-        xyz="-0.044924 0.0039137 -0.040662"
+        xyz="0.00015592 -0.03241 -0.074114"
         rpy="0 0 0" />
       <mass
-        value="0.23292" />
+        value="0.26619" />
       <inertia
-        ixx="7.0788E-05"
-        ixy="1.2054E-05"
-        ixz="-5.2515E-06"
-        iyy="0.00019796"
-        iyz="2.6886E-06"
-        izz="0.00017873" />
+        ixx="0.00044783"
+        ixy="1.7606E-07"
+        ixz="-1.0156E-06"
+        iyy="0.00042274"
+        iyz="-4.3434E-06"
+        izz="8.5179E-05" />
     </inertial>
     <visual>
       <origin
@@ -35,7 +35,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://rover_description/meshes/STL/suspension/sus_link.stl" />
+          filename="package://rover_description/meshes/STL/suspension/steering.STL" />
       </geometry>
       <material
         name="">
@@ -49,7 +49,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://rover_description/meshes/STL/suspension/sus_link.stl" />
+          filename="package://rover_description/meshes/STL/suspension/steering.STL" />
       </geometry>
     </collision>
 	</link>

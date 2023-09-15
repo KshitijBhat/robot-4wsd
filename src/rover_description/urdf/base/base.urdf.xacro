@@ -12,33 +12,36 @@
 
 	<link name="base_link">
 	  <visual>
-		<geometry>
-		  <mesh filename="package://rover_description/meshes/STL/base/base_link.stl"/>
-		</geometry>
+	    <origin
+		  xyz="0 0 0"
+		  rpy="0 0 0" />
+	    <geometry>
+		  <mesh filename="package://rover_description/meshes/STL/base/base_link.STL"/>
+	    </geometry>
 	  </visual>
-	<collision>
-      <origin
-        xyz="0.0090992 -0.050658 -0.002"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://rover_description/meshes/STL/base/base_link.stl" />
-      </geometry>
-    </collision>
-		<inertial>
+	  <collision>
+	    <origin
+		  xyz="0 0 0"
+		  rpy="0 0 0" />
+	    <geometry>
+		  <mesh
+		  filename="package://rover_description/meshes/STL/base/base_link.STL" />
+	    </geometry>
+	  </collision>
+	  <inertial>
 		<origin
-			xyz="0 0 0"
+			xyz="-0.00062726 0.00031624 0.021725"
 			rpy="0 0 0" />
 		<mass
-			value="8.0206" />
-		<inertia
-			ixx="0.0159"
-			ixy="7.4996E-05"
-			ixz="-8.6149E-05"
-			iyy="0.011714"
-			iyz="0.0007604"
-			izz="0.015363" />
-		</inertial>
+			value="4.6623" />
+	    <inertia
+			ixx="0.021722"
+			ixy="6.1565E-06"
+			ixz="2.5518E-06"
+			iyy="0.08573"
+			iyz="6.3788E-07"
+			izz="0.10519" />
+	  </inertial>
 	</link>
   </xacro:macro>
   
