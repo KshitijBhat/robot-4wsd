@@ -1,5 +1,5 @@
 <package format="2">
-  <name>rover_control</name>
+  <name>rover_control_simulation</name>
   <version>0.17.0</version>
   <description>Controller for a four wheel steering mobile base.</description>
   <maintainer email="kshitijmbhat@gmail.com">Kshitij Bhat</maintainer>

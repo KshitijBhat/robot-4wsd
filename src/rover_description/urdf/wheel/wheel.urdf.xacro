@@ -39,7 +39,7 @@
       <material
         name="">
         <color
-          rgba="0.25098 0.25098 0.25098 1" />
+          rgba="0.75294 0.75294 0.75294 1" />
       </material>
     </visual>
     <collision>

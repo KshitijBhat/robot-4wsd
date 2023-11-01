@@ -28,4 +28,6 @@
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
   		args="-urdf -model rover -param robot_description"/>
 
+  <include file="$(find rover_control_simulation)/launch/control.launch"/>
+
 </launch>
