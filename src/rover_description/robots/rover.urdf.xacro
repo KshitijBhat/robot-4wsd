@@ -14,7 +14,7 @@
   <!-- Base -->
   <link name="base_footprint"/>
   <xacro:base_v0 parent="base_footprint">
-	<origin xyz="0 0 0.25" rpy="0 0 -1.570796"/>
+	<origin xyz="0 0 0.25" rpy="0 0 0"/>
   </xacro:base_v0>
 
   <!-- Suspension -->
@@ -43,22 +43,22 @@
   <!-- Front Right Wheel -->
   <xacro:wheel_v0 prefix="ffr" parent="front_right_steering_link">
 	<origin xyz="0 0 -0.129" rpy="0 0 0"/>
-	<axis xyz="0 1 0"/>
+	<axis xyz="0 -1 0"/>
   </xacro:wheel_v0>
   <!--  Front Left Wheel -->
   <xacro:wheel_v0 prefix="ffl" parent="front_left_steering_link">
 	<origin xyz="0 0 -0.129" rpy="0 0 0"/>
-	<axis xyz="0 -1 0"/>
+	<axis xyz="0 1 0"/>
   </xacro:wheel_v0>
   <!-- Rear Right Wheel -->
   <xacro:wheel_v0 prefix="rfr" parent="rear_right_steering_link">
 	<origin xyz="0 0 -0.129" rpy="0 0 0"/>
-	<axis xyz="0 1 0"/>
+	<axis xyz="0 -1 0"/>
   </xacro:wheel_v0>
   <!--  Rear Left Wheel -->
   <xacro:wheel_v0 prefix="rfl" parent="rear_left_steering_link">
 	<origin xyz="0 0 -0.129" rpy="0 0 0"/>
-	<axis xyz="0 -1 0"/>
+	<axis xyz="0 1 0"/>
   </xacro:wheel_v0>
 
   <!-- ===============  Wheel Transmission =============== -->
