@@ -71,9 +71,66 @@
   <xacro:steering_trans_v0 prefix="rear_right"/>
   <xacro:steering_trans_v0 prefix="rear_left"/>
 
+  <!-- =============== GPS Sensor =============== -->
+  <xacro:property name="gps_sensor_height" value="0.02" />
+  <xacro:property name="gps_sensor_width" value="0.02" />
+  <joint name="gps_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="gps_link"/>
+  </joint>
+
+  <link name="gps_link">
+    <collision>
+      <origin xyz="0 0 0.43" rpy="0 0 0"/>
+      <geometry>
+        <box size="${gps_sensor_width} ${gps_sensor_width} ${gps_sensor_height}"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0.43" rpy="0 0 0"/>
+      <geometry>
+        <box size="${gps_sensor_width} ${gps_sensor_width} ${gps_sensor_height}"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0.43" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia
+        ixx="1.0" ixy="0.0" ixz="0.0"
+        iyy="1.0" iyz="0.0"
+        izz="1.0"/>
+    </inertial>
+  </link>
+
+  <material name="orange">
+    <color rgba="${255/255} ${108/255} ${10/255} 1.0"/>
+  </material>
+  <gazebo reference="gps_link">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
   <!-- =============== Gazebo =============== -->
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    </plugin>
+    <plugin name="gazebo_ros_gps" filename="libhector_gazebo_ros_gps.so">
+        <updateRate>4.0</updateRate>
+        <bodyName>gps_link</bodyName>
+        <frameId>gps_link</frameId>
+        <topicName>/gps/fix</topicName>
+        <velocityTopicName>/gps/fix_velocity</velocityTopicName>
+        <referenceLatitude>-30.06022459407145675</referenceLatitude>
+        <referenceLongitude>-51.173913575780311191</referenceLongitude>
+        <referenceHeading>90</referenceHeading>
+        <referenceAltitude>10</referenceAltitude>
+        <offset>0 0 0</offset>
+        <drift>0.001 0.001 0.001</drift>
+        <gaussianNoise>0.05 0.05 0.05</gaussianNoise>
+        <velocityDrift>0.001 0.001 0.001</velocityDrift>
+        <velocityGaussianNoise>0.5 0.5 0.5</velocityGaussianNoise>
     </plugin>
   </gazebo>
 
